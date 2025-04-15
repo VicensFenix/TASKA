@@ -1,6 +1,6 @@
 # 📝 TASKA - Gestor de Tareas y Eventos
 
-![TASKA Preview](assets/img/preview.png)
+![TASKA Preview](assets/img/Logo_TASKA.png)
 
 Aplicación web para gestión de tareas y calendario con funciones completas de productividad.
 
