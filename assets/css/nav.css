@@ -37,8 +37,6 @@
 
 /* Estilos globales */
 body {
-  color: var(--text-color);
-  background-color: #f5f5f5;
   transition: all var(--transition-speed) ease;
   padding-top: var(--nav-height); /* Para que el contenido no quede detrás del header */
 }
@@ -101,6 +99,7 @@ body {
   height: 100%;
   align-items: center;
   transition: all var(--transition-speed);
+  color: var(--text-color);
 }
 
 .content-nav {
@@ -125,6 +124,7 @@ body {
 }
 
 .item-menu {
+  color: var(--text-color);
   height: 100%;
   display: flex;
   align-items: center;
