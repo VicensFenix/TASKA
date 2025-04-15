@@ -16,6 +16,7 @@
   --inputtext-color: #1658d9;
   --maintitle-color: #1758d9;
   --btn-color: rgba(255, 255, 255, 0.5);
+  --linkdark-color-hover: rgba(255, 255, 255, 0.1);
   
   /* Fuentes */
   --maintitle-font: 'Orbitron', sans-serif;
@@ -167,5 +168,6 @@ body {
 }
 
 .link-menu:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--linkdark-color-hover);
 }
+
