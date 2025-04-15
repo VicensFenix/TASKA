@@ -31,18 +31,22 @@
 body {
   color: var(--text-color);
   transition: margin-left var(--transition-speed);
-  background-color: #f5f5f5; /* Añadido para contraste */
+  background-color: #f5f5f5;
+  margin-left: var(--nav-width); /* Margen para el nav en desktop */
 }
 
-/* Header y Nav */
+/* Header */
 .header {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: var(--nav-width); /* Ajuste para no solaparse con el nav */
+  width: calc(100% - var(--nav-width)); /* Ancho restante */
   z-index: 1000;
+  background: #fff; /* Ejemplo: fondo blanco para el header */
+  padding: 1rem;
 }
 
+/* Navbar */
 .nav {
   position: fixed;
   top: 0;
@@ -50,24 +54,20 @@ body {
   width: var(--nav-width);
   height: 100vh;
   padding: 1rem;
-  transform: translateX(-100%);
-  transition: transform var(--transition-speed);
   background: var(--bg-nav-themdark);
   z-index: 1000;
   overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.nav.active {
-  transform: translateX(0);
-}
-
+/* Contenido del Nav */
 .content-nav {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-/* Información del logo */
+/* Logo e información */
 .information-nav {
   display: flex;
   align-items: center;
@@ -76,7 +76,6 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Logo nav */
 .img-nav {
   width: 180px;
   height: 180px;
@@ -84,22 +83,18 @@ body {
   border-radius: 50%;
 }
 
-/* Botón del menú toggle */
+/* Botón de menú (solo visible en móvil/tablet) */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
-  color: var(--text-light);
+  color: var(--text-color);
   font-size: 1.5rem;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   top: 1rem;
-  right: 1rem;
+  left: 1rem;
   z-index: 1100;
-}
-
-.icon-close {
-  display: none;
 }
 
 /* Buscador */
@@ -171,3 +166,27 @@ body {
   background-color: var(--linkdark-color-hover);
 }
 
+/* Estilos responsivos (Móvil y Tablet) */
+@media (max-width: 992px) {
+  body {
+    margin-left: 0; /* Quitamos el margen en móvil */
+  }
+
+  .header {
+    left: 0;
+    width: 100%; /* Header ocupa toda la pantalla */
+  }
+
+  .nav {
+    transform: translateX(-100%); /* Ocultamos el nav por defecto */
+    transition: transform var(--transition-speed);
+  }
+
+  .nav.active {
+    transform: translateX(0); /* Mostramos el nav cuando está activo */
+  }
+
+  .menu-toggle {
+    display: block; /* Mostramos el botón de menú */
+  }
+}
