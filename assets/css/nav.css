@@ -1,8 +1,15 @@
+/* Asegurar que el viewport se maneje correctamente */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+}
+
 /* Estilos generales */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  -webkit-tap-highlight-color: transparent; /* Elimina el resaltado al tocar en móviles */
 }
 
 /* Variables globales */
@@ -23,6 +30,7 @@
   --textnav-font: 'Inter', sans-serif;
   
   /* Dimensiones */
+  --nav-height: 70px; /* Añadido para consistencia */
   --nav-width: 250px;
   --transition-speed: 0.3s;
 }
@@ -30,77 +38,121 @@
 /* Estilos globales */
 body {
   color: var(--text-color);
-  transition: margin-left var(--transition-speed);
   background-color: #f5f5f5;
-  margin-left: var(--nav-width); /* Margen para el nav en desktop */
+  transition: all var(--transition-speed) ease;
+  padding-top: var(--nav-height); /* Para que el contenido no quede detrás del header */
 }
 
-/* Header */
+/* Header/Navbar superior */
 .header {
   position: fixed;
   top: 0;
-  left: var(--nav-width); /* Ajuste para no solaparse con el nav */
-  width: calc(100% - var(--nav-width)); /* Ancho restante */
-  z-index: 1000;
-  background: #fff; /* Ejemplo: fondo blanco para el header */
-  padding: 1rem;
-}
-
-/* Navbar */
-.nav {
-  position: fixed;
-  top: 0;
   left: 0;
-  width: var(--nav-width);
-  height: 100vh;
-  padding: 1rem;
+  width: 100%;
+  height: var(--nav-height);
   background: var(--bg-nav-themdark);
   z-index: 1000;
-  overflow-y: auto;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Contenido del Nav */
-.content-nav {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  align-items: center;
+  justify-content: space-between; /* Mejor distribución del espacio */
+  padding: 0 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo e información */
+/* Contenedor del logo */
 .information-nav {
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  height: 100%;
 }
 
 .img-nav {
-  width: 180px;
-  height: 180px;
-  margin-right: 10px;
+  height: 100%;
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
   border-radius: 50%;
 }
 
-/* Botón de menú (solo visible en móvil/tablet) */
+/* Botón de menú hamburguesa - Mejorado para móvil */
 .menu-toggle {
-  display: none;
+  display: none; /* Oculto por defecto */
   background: none;
   border: none;
   color: var(--text-color);
-  font-size: 1.5rem;
+  font-size: 1.8rem; /* Tamaño más grande para mejor tacto */
   cursor: pointer;
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 1100;
+  padding: 0.5rem;
+  z-index: 1001; /* Por encima del nav */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-toggle:focus {
+  outline: none; /* Eliminar outline en focus para mejor apariencia */
+}
+
+.icon-close {
+  display: none;
+}
+
+/* Menú de navegación */
+.nav {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  transition: all var(--transition-speed);
+}
+
+.content-nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.content-menu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.list-menu {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.item-menu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.link-menu {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1.5rem;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background-color 0.2s;
+  font-family: var(--textnav-font);
+  white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.link-menu:hover {
+  background-color: var(--linkdark-color-hover);
 }
 
 /* Buscador */
 .container-search {
-  margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 1rem;
   font-family: var(--textnav-font);
+  display: flex;
+  align-items: center;
 }
 
 .box-search {
@@ -110,12 +162,14 @@ body {
 }
 
 .input-search {
-  width: 100%;
+  width: 200px;
   padding: 0.5rem 2rem 0.5rem 1rem;
   border-radius: 20px;
   border: none;
   color: var(--inputtext-color);
   background-color: var(--bg-inputnav);
+  font-family: var(--textnav-font);
+  font-size: 1rem; /* Tamaño legible en móviles */
 }
 
 .input-search::placeholder {
@@ -128,6 +182,8 @@ body {
   border: none;
   color: var(--btn-color);
   cursor: pointer;
+  transition: opacity 0.2s;
+  font-size: 1rem; /* Tamaño adecuado para móviles */
 }
 
 .btn-ex {
@@ -138,55 +194,95 @@ body {
   right: 10px;
 }
 
-/* Menú de navegación */
-.content-menu {
-  flex-grow: 1;
+.btn-ex:hover, .btn-glass:hover {
+  opacity: 0.8;
 }
 
-.list-menu {
-  list-style: none;
-}
-
-.item-menu {
-  margin-bottom: 0.5rem;
-  font-family: var(--textnav-font);
-}
-
-.link-menu {
-  display: block;
-  padding: 0.75rem 1rem;
-  color: var(--text-color);
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  font-family: var(--textnav-font);
-}
-
-.link-menu:hover {
-  background-color: var(--linkdark-color-hover);
-}
-
-/* Estilos responsivos (Móvil y Tablet) */
+/* Estilos para móvil - Versión corregida */
 @media (max-width: 992px) {
-  body {
-    margin-left: 0; /* Quitamos el margen en móvil */
-  }
-
+  /* Header siempre visible */
   .header {
-    left: 0;
-    width: 100%; /* Header ocupa toda la pantalla */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
   }
 
-  .nav {
-    transform: translateX(-100%); /* Ocultamos el nav por defecto */
-    transition: transform var(--transition-speed);
+  /* Logo siempre visible */
+  .information-nav {
+    display: flex !important;
+    order: 1;
   }
 
-  .nav.active {
-    transform: translateX(0); /* Mostramos el nav cuando está activo */
-  }
-
+  /* Botón toggle siempre visible */
   .menu-toggle {
-    display: block; /* Mostramos el botón de menú */
+    display: block !important;
+    order: 3;
+    margin-left: 15px;
+  }
+
+  /* Buscador siempre visible */
+  .container-search {
+    display: flex !important;
+    order: 2;
+    margin: 0 15px 0 auto;
+    width: auto;
+    flex-grow: 1;
+    max-width: 200px;
+  }
+
+  /* Solo el menú de links se oculta/muestra */
+  .content-menu {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--nav-height));
+    background: var(--bg-nav-themdark);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .content-menu.active {
+    transform: translateX(0);
+  }
+
+  /* Estilos para los links del menú */
+  .list-menu {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .item-menu {
+    display: block !important;
+    width: 100%;
+    margin: 5px;
+  }
+
+  .link-menu {
+    display: flex !important;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  /* Manejo de íconos del toggle */
+  .icon-menu {
+    display: block;
+  }
+
+  .icon-close {
+    display: none;
+  }
+
+  .content-menu.active ~ .menu-toggle .icon-menu {
+    display: none;
+  }
+
+  .content-menu.active ~ .menu-toggle .icon-close {
+    display: block;
   }
 }
