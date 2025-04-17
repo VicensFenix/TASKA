@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="Logo_TASKA.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/Logo_TASKA.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/nav.css">
-    <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/calendar.css">
     <script src="/assets/js/menuToogle.js" defer></script>
     <title>TASKA</title>
 </head>
@@ -46,11 +46,11 @@
                     <ul class="list-menu">
                         <li class="item-menu">
                             <i class="icon-item">📚</i>
-                            <a class="link-menu" href="index.html">Mis Tareas</a>
+                            <a class="link-menu" href="/index.html">Mis Tareas</a>
                         </li>
                         <li class="item-menu">
                             <i class="icon-item">📅</i>
-                            <a class="link-menu" href="pages/calendar.html">Calendario</a>
+                            <a class="link-menu" href="calendar.html">Calendario</a>
                         </li>
                     </ul>
                 </div>
@@ -59,30 +59,42 @@
 
     </header>
 
-    <!-- Contenido Principal -->
-    <main class="main">
+    <!-- Sección del calendario de eventos -->
+    <section class="section-calendar">
 
-        <!-- Sección de la Lista de Tarea -->
-        <section class="section-task">
-
-            <!-- Contenedor para crear las tareas -->
-            <div class="content-task">
-                <input class="input-titletask" type="text" placeholder="Ingrese el titulo de la tarea">
-                <input class="input-texttask" type="text" placeholder="Ingrese una nueva tarea">
-                <!-- Botón para crear nuevas tareas -->
-                <button class="btn-task" onclick="crearTarea()">✔︎</button>
+        <!-- Contenedor del calendario -->
+        <div class="calendar">
+            <!-- Encabezado del calendario (mes/año y controles) -->
+            <div class="calendar-header">
+                <button id="prev-month">< Anterior</button>
+                <h2 id="month-year">Mes Año</h2>
+                <button id="next-month">Siguiente ></button>
+            </div>
+        
+            <!-- Cuerpo del calendario -->
+            <div class="calendar-body">
+                <!-- Encabezados de los días de la semana -->
+                <div class="day-header">Dom</div>
+                <div class="day-header">Lun</div>
+                <div class="day-header">Mar</div>
+                <div class="day-header">Mié</div>
+                <div class="day-header">Jue</div>
+                <div class="day-header">Vie</div>
+                <div class="day-header">Sáb</div>
+            
+                <!-- Los días del mes se generarán dinámicamente con JavaScript -->
+                <!-- Ejemplo de cómo se verían algunos días: -->
+                <div class="day other-month">30</div> <!-- Día del mes anterior -->
+                <div class="day">1</div> <!-- Primer día del mes -->
+                <div class="day today">2</div> <!-- Día actual -->
+                <div class="day">3</div>
+                <!-- ... más días ... -->
+                <div class="day other-month">1</div> <!-- Día del mes siguiente -->
             </div>
 
-            <!-- Contenedor de las tareas creadas -->
-            <div class="containercreate-task" id="listaTarea">
+        </div>
 
-                <!-- Tareas creadas -->
-
-            </div>
-
-        </section>
-
-    </main>
+    </section>
 
     <!-- Pie de Página -->
     <footer class="footer">
