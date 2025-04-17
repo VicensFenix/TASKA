@@ -19,11 +19,13 @@
   --bg-nav-themawhite: #fff;
   --bg-inputnav: rgba(255, 255, 255, 0.1);
   --text-color: #ddd;
+  --linktext-color: blue;
   --input-placheholder-color: #ccc;
   --inputtext-color: #1658d9;
   --maintitle-color: #1758d9;
   --btn-color: rgba(255, 255, 255, 0.5);
   --linkdark-color-hover: rgba(255, 255, 255, 0.1);
+  --menubtn-color: white;
   
   /* Fuentes */
   --maintitle-font: 'Orbitron', sans-serif;
@@ -41,7 +43,7 @@ body {
   padding-top: var(--nav-height); /* Para que el contenido no quede detrás del header */
 }
 
-/* Header/Navbar superior */
+/* Estilos de header */
 .header {
   position: fixed;
   top: 0;
@@ -52,48 +54,10 @@ body {
   z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Mejor distribución del espacio */
   padding: 0 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor del logo */
-.information-nav {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.img-nav {
-  height: 100%;
-  max-height: 80px;
-  width: auto;
-  object-fit: contain;
-  border-radius: 50%;
-}
-
-/* Botón de menú hamburguesa - Mejorado para móvil */
-.menu-toggle {
-  display: none; /* Oculto por defecto */
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 1.8rem; /* Tamaño más grande para mejor tacto */
-  cursor: pointer;
-  padding: 0.5rem;
-  z-index: 1001; /* Por encima del nav */
-  -webkit-tap-highlight-color: transparent;
-}
-
-.menu-toggle:focus {
-  outline: none; /* Eliminar outline en focus para mejor apariencia */
-}
-
-.icon-close {
-  display: none;
-}
-
-/* Menú de navegación */
+/* Estilos del nav */
 .nav {
   display: flex;
   height: 100%;
@@ -102,65 +66,87 @@ body {
   color: var(--text-color);
 }
 
+/* Estilos del contenedor del nav */
 .content-nav {
   display: flex;
-  align-items: center;
-  height: 100%;
   width: 100%;
-}
-
-.content-menu {
   height: 100%;
-  display: flex;
   align-items: center;
 }
 
-.list-menu {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.item-menu {
-  color: var(--text-color);
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.link-menu {
+/* Estilos de la parte informativa del nav */
+.information-nav {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 1.5rem;
-  color: var(--text-color);
-  text-decoration: none;
-  transition: background-color 0.2s;
-  font-family: var(--textnav-font);
-  white-space: nowrap; /* Evita que el texto se rompa */
+  flex-shrink: 0; /* Evita que se encoja */
 }
 
-.link-menu:hover {
-  background-color: var(--linkdark-color-hover);
+/* Estilos del titulo del nav */
+.maintitle-nav {
+  color: var(--maintitle-color);
+  text-align: left;
+  font-family: var(--maintitle-font);
+  font-size: 2rem;
+  font-style: oblique;
+  padding-left: 12px;
 }
 
-/* Buscador */
+/* Estilos del logo del nav */
+.img-nav {
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 100%;
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* Botón de menú hamburguesa - Mejorado para móvil */
+.menu-toggle {
+  color: var(--menubtn-color);
+  background: var(--bg-nav-themdark);
+  display: none; /* Oculto*/
+  border: none; /* Oculto*/
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001; /* Por encima del nav */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Estilo del menu-toggle cuando esta activo */
+.menu-toggle:focus {
+  outline: none; /* Eliminar outline en focus para mejor apariencia */
+}
+
+/* Estilo del icono para cerrar */
+.icon-close {
+  display: none;
+}
+
+/* Estilos para el contenedor del buscador */
 .container-search {
-  margin-left: 2rem;
-  margin-right: 1rem;
-  font-family: var(--textnav-font);
+  flex-grow: 1; /* Ocupa todo el espacio disponible */
   display: flex;
+  justify-content: center;
+  height: 100%;
   align-items: center;
+  padding: 0 20px; /* Espaciado opcional */
 }
 
+/* Estilos del buscador */
 .box-search {
+  width: 100%;
+  max-width: 500px; /* Ancho máximo para el buscador */
   position: relative;
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
+/* Estilos para el input del buscador */
 .input-search {
   width: 200px;
   padding: 0.5rem 2rem 0.5rem 1rem;
@@ -172,10 +158,12 @@ body {
   font-size: 1rem; /* Tamaño legible en móviles */
 }
 
+/* Estilos del plecheholder del input del buscador */
 .input-search::placeholder {
   color: var(--input-placheholder-color);
 }
 
+/* Estilos de los botones del buscador */
 .btn-ex, .btn-glass {
   position: absolute;
   background: transparent;
@@ -186,103 +174,227 @@ body {
   font-size: 1rem; /* Tamaño adecuado para móviles */
 }
 
+/* Estilos del botón de cerrar */
 .btn-ex {
   right: 35px;
+  padding: 5px;
 }
 
+/* Estilo del botón de buscar */
 .btn-glass {
   right: 10px;
 }
 
+/* Estilos de los botones cuando pase el maus por encima */
 .btn-ex:hover, .btn-glass:hover {
   opacity: 0.8;
 }
 
-/* Estilos para móvil - Versión corregida */
-@media (max-width: 992px) {
-  /* Header siempre visible */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
-  }
+/* Estilos del contenedor del menú */
+.content-menu {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex-shrink: 0; /* Evita que se encoja */
+  margin-left: auto; /* Empuja a la derecha */
+}
 
-  /* Logo siempre visible */
-  .information-nav {
-    display: flex !important;
-    order: 1;
-  }
+/* Estilos de la lista del menú */
+.list-menu {
+  display: flex;
+  height: 100%;
+}
 
-  /* Botón toggle siempre visible */
+/* Estilos de los item del menú */
+.item-menu {
+  color: var(--text-color);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Estilos del item menú cuando pasan el mause por encima */
+.item-menu:hover {
+  opacity: 0.8;
+  background-color: var(--linkdark-color-hover);
+}
+
+/* Estilos de los iconos de los item */
+.icon-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+/* Estilos de los links del menú */
+.link-menu {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1.5rem;
+  text-decoration: none;
+  color: var(--linktext-color);
+  font-family: var(--textnav-font);
+  white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+
+/* Media Queries para Responsive Design */
+
+/* Tabletas (768px - 1024px) */
+@media (max-width: 1024px) {
+  .maintitle-nav {
+    font-size: 1.5rem;
+    padding-left: 8px;
+  }
+  
+  .img-nav {
+    padding-left: 16px;
+    padding-right: 16px;
+    max-height: 50px;
+  }
+  
+  .input-search {
+    width: 180px;
+    font-size: 0.9rem;
+  }
+  
+  .link-menu {
+    padding: 0 1rem;
+  }
+  
+  .icon-item {
+    font-size: 1.3rem;
+  }
+}
+
+/* Móviles (hasta 767px) */
+@media (max-width: 767px) {
+  /* Mostrar botón hamburguesa */
   .menu-toggle {
-    display: block !important;
-    order: 3;
-    margin-left: 15px;
+    display: block;
   }
-
-  /* Buscador siempre visible */
-  .container-search {
-    display: flex !important;
-    order: 2;
-    margin: 0 15px 0 auto;
-    width: auto;
-    flex-grow: 1;
-    max-width: 200px;
-  }
-
-  /* Solo el menú de links se oculta/muestra */
+  
+  /* Ocultar menú principal */
   .content-menu {
     position: fixed;
     top: var(--nav-height);
     left: 0;
-    width: 100%;
+    width: var(--nav-width);
     height: calc(100vh - var(--nav-height));
     background: var(--bg-nav-themdark);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 999;
+    transition: transform var(--transition-speed) ease;
+    padding-top: 1rem;
     overflow-y: auto;
-    padding: 20px;
   }
-
+  
+  /* Mostrar menú cuando está activo */
   .content-menu.active {
     transform: translateX(0);
   }
-
-  /* Estilos para los links del menú */
+  
+  /* Cambiar lista a vertical */
   .list-menu {
-    display: flex !important;
     flex-direction: column;
     width: 100%;
+    height: auto;
   }
-
+  
+  /* Estilos para items en móvil */
   .item-menu {
-    display: block !important;
     width: 100%;
-    margin: 5px;
+    height: auto;
+    padding: 1rem;
+    justify-content: flex-start;
   }
-
-  .link-menu {
-    display: flex !important;
-    padding: 12px;
-    font-size: 16px;
+  
+  /* Ajustar título y logo */
+  .maintitle-nav {
+    font-size: 1.3rem;
+    padding-left: 4px;
   }
-
-  /* Manejo de íconos del toggle */
-  .icon-menu {
-    display: block;
+  
+  .img-nav {
+    padding-left: 12px;
+    padding-right: 12px;
+    max-height: 45px;
   }
-
-  .icon-close {
+  
+  /* Ajustar buscador */
+  .container-search {
+    padding: 0 10px;
+  }
+  
+  .input-search {
+    width: 150px;
+    font-size: 0.8rem;
+    padding: 0.4rem 1.8rem 0.4rem 0.8rem;
+  }
+  
+  .btn-ex, .btn-glass {
+    font-size: 0.9rem;
+  }
+  
+  .btn-ex {
+    right: 30px;
+  }
+  
+  /* Mostrar icono de cerrar cuando el menú está abierto */
+  .menu-toggle.active .icon-menu {
     display: none;
   }
-
-  .content-menu.active ~ .menu-toggle .icon-menu {
-    display: none;
-  }
-
-  .content-menu.active ~ .menu-toggle .icon-close {
+  
+  .menu-toggle.active .icon-close {
     display: block;
+  }
+  
+  /* Asegurar que el contenido no se desborde */
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Pequeños móviles (hasta 480px) */
+@media (max-width: 480px) {
+  .maintitle-nav {
+    font-size: 1.1rem;
+  }
+  
+  .img-nav {
+    max-height: 40px;
+  }
+  
+  .input-search {
+    width: 120px;
+  }
+  
+  /* Reducir padding del header */
+  .header {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Animación para suavizar la transición del menú */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
   }
 }
