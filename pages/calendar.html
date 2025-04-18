@@ -66,9 +66,9 @@
         <div class="calendar">
             <!-- Encabezado del calendario (mes/año y controles) -->
             <div class="calendar-header">
-                <button id="prev-month">< Anterior</button>
-                <h2 id="month-year">Mes Año</h2>
-                <button id="next-month">Siguiente ></button>
+                <button class="btn-calendar" id="prev-month">◀  Anterior</button>
+                <h2 class="title-monthyear" id="month-year">Mes Año</h2>
+                <button class="btn-calendar" id="next-month">Siguiente  ▶</button>
             </div>
         
             <!-- Cuerpo del calendario -->
@@ -86,10 +86,10 @@
                 <!-- Ejemplo de cómo se verían algunos días: -->
                 <div class="day other-month">30</div> <!-- Día del mes anterior -->
                 <div class="day">1</div> <!-- Primer día del mes -->
-                <div class="day today">2</div> <!-- Día actual -->
+                <div class="day_today">2</div> <!-- Día actual -->
                 <div class="day">3</div>
                 <!-- ... más días ... -->
-                <div class="day other-month">1</div> <!-- Día del mes siguiente -->
+                <div class="day_other-month">1</div> <!-- Día del mes siguiente -->
             </div>
 
         </div>
@@ -110,6 +110,7 @@
     </footer>
 
     <script src="/assets/js/crearTarea.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
 </html>
