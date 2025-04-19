@@ -126,70 +126,6 @@ body {
   display: none;
 }
 
-/* Estilos para el contenedor del buscador */
-.container-search {
-  flex-grow: 1; /* Ocupa todo el espacio disponible */
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  align-items: center;
-  padding: 0 20px; /* Espaciado opcional */
-}
-
-/* Estilos del buscador */
-.box-search {
-  width: 100%;
-  max-width: 500px; /* Ancho máximo para el buscador */
-  position: relative;
-  display: flex;
-  align-items: center;
-  text-align: center;
-}
-
-/* Estilos para el input del buscador */
-.input-search {
-  width: 200px;
-  padding: 0.5rem 2rem 0.5rem 1rem;
-  border-radius: 20px;
-  border: none;
-  color: var(--inputtext-color);
-  background-color: var(--bg-inputnav);
-  font-family: var(--textnav-font);
-  font-size: 1rem; /* Tamaño legible en móviles */
-}
-
-/* Estilos del plecheholder del input del buscador */
-.input-search::placeholder {
-  color: var(--input-placheholder-color);
-}
-
-/* Estilos de los botones del buscador */
-.btn-ex, .btn-glass {
-  position: absolute;
-  background: transparent;
-  border: none;
-  color: var(--btn-color);
-  cursor: pointer;
-  transition: opacity 0.2s;
-  font-size: 1rem; /* Tamaño adecuado para móviles */
-}
-
-/* Estilos del botón de cerrar */
-.btn-ex {
-  right: 35px;
-  padding: 5px;
-}
-
-/* Estilo del botón de buscar */
-.btn-glass {
-  right: 10px;
-}
-
-/* Estilos de los botones cuando pase el maus por encima */
-.btn-ex:hover, .btn-glass:hover {
-  opacity: 0.8;
-}
-
 /* Estilos del contenedor del menú */
 .content-menu {
   display: flex;
@@ -256,11 +192,6 @@ body {
     max-height: 50px;
   }
   
-  .input-search {
-    width: 180px;
-    font-size: 0.9rem;
-  }
-  
   .link-menu {
     padding: 0 1rem;
   }
@@ -324,25 +255,6 @@ body {
     padding-left: 12px;
     padding-right: 12px;
     max-height: 45px;
-  }
-  
-  /* Ajustar buscador */
-  .container-search {
-    padding: 0 10px;
-  }
-  
-  .input-search {
-    width: 150px;
-    font-size: 0.8rem;
-    padding: 0.4rem 1.8rem 0.4rem 0.8rem;
-  }
-  
-  .btn-ex, .btn-glass {
-    font-size: 0.9rem;
-  }
-  
-  .btn-ex {
-    right: 30px;
   }
   
   /* Mostrar icono de cerrar cuando el menú está abierto */
