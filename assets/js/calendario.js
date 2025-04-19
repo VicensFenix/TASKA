@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Variables de estado
     let currentDate = new Date();
-    let selectedDate = null;
     let events = JSON.parse(localStorage.getItem('calendarEvents')) || {};
     
     // Elementos del DOM
@@ -9,22 +8,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentMonthEl = document.getElementById('current-month');
     const prevMonthBtn = document.getElementById('prev-month');
     const nextMonthBtn = document.getElementById('next-month');
-    const eventModal = document.getElementById('event-modal');
+    const eventDateEl = document.getElementById('event-date');
     const eventDescEl = document.getElementById('event-desc');
     const eventEmojiEl = document.getElementById('event-emoji');
     const saveEventBtn = document.getElementById('save-event');
-    const cancelEventBtn = document.getElementById('cancel-event');
     
-    // Inicializar el calendario
-    renderCalendar();
+    // Inicializar
+    initCalendar();
     
-    // Event listeners
-    prevMonthBtn.addEventListener('click', goToPreviousMonth);
-    nextMonthBtn.addEventListener('click', goToNextMonth);
-    cancelEventBtn.addEventListener('click', closeModal);
-    saveEventBtn.addEventListener('click', saveEvent);
+    function initCalendar() {
+        // Configurar fecha mínima como hoy (opcional)
+        eventDateEl.min = new Date().toISOString().split('T')[0];
+        
+        // Establecer fecha actual como valor por defecto
+        const today = new Date();
+        eventDateEl.valueAsDate = today;
+        
+        // Renderizar calendario
+        renderCalendar();
+        
+        // Event listeners
+        prevMonthBtn.addEventListener('click', goToPreviousMonth);
+        nextMonthBtn.addEventListener('click', goToNextMonth);
+        saveEventBtn.addEventListener('click', saveEvent);
+    }
     
-    // Funciones principales
     function goToPreviousMonth() {
         currentDate.setMonth(currentDate.getMonth() - 1);
         renderCalendar();
@@ -35,23 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCalendar();
     }
     
-    function closeModal() {
-        eventModal.style.display = 'none';
-    }
-    
-    function openModal(dateKey) {
-        selectedDate = dateKey;
-        eventDescEl.value = '';
-        eventEmojiEl.value = '📅'; // Emoji por defecto
-        eventModal.style.display = 'flex';
-        eventDescEl.focus();
-    }
-    
     function renderCalendar() {
         // Limpiar calendario
         calendarEl.innerHTML = '';
         
-        // Añadir encabezados de días con clases
+        // Añadir encabezados de días
         const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
         daysOfWeek.forEach(day => {
             const dayHeader = document.createElement('div');
@@ -60,20 +56,20 @@ document.addEventListener('DOMContentLoaded', function() {
             calendarEl.appendChild(dayHeader);
         });
         
-        // Actualizar el título del mes
+        // Actualizar título del mes
         updateMonthTitle();
         
-        // Obtener información del mes actual
-        const { firstDayOfMonth, lastDayOfMonth, startDay, daysInLastMonth } = getMonthInfo();
+        // Obtener información del mes
+        const { firstDay, lastDay, startDay, daysInLastMonth } = getMonthInfo();
         
-        // Rellenar días del mes anterior (si es necesario)
-        renderPreviousMonthDays(daysInLastMonth, startDay);
+        // Rellenar días del mes anterior
+        fillPreviousMonthDays(daysInLastMonth, startDay);
         
         // Rellenar días del mes actual
-        renderCurrentMonthDays(lastDayOfMonth);
+        fillCurrentMonthDays(lastDay);
         
-        // Rellenar días del siguiente mes (si es necesario)
-        renderNextMonthDays(startDay, lastDayOfMonth.getDate());
+        // Rellenar días del siguiente mes
+        fillNextMonthDays(startDay, lastDay.getDate());
     }
     
     function updateMonthTitle() {
@@ -83,15 +79,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function getMonthInfo() {
-        const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-        const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        const startDay = firstDayOfMonth.getDay();
+        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        const startDay = firstDay.getDay();
         const daysInLastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
         
-        return { firstDayOfMonth, lastDayOfMonth, startDay, daysInLastMonth };
+        return { firstDay, lastDay, startDay, daysInLastMonth };
     }
     
-    function renderPreviousMonthDays(daysInLastMonth, startDay) {
+    function fillPreviousMonthDays(daysInLastMonth, startDay) {
         for (let i = 0; i < startDay; i++) {
             const day = document.createElement('div');
             day.className = 'day inactive';
@@ -106,8 +102,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function renderCurrentMonthDays(lastDayOfMonth) {
-        for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+    function fillCurrentMonthDays(lastDay) {
+        for (let i = 1; i <= lastDay.getDate(); i++) {
             const day = document.createElement('div');
             day.className = 'day';
             
@@ -116,20 +112,24 @@ document.addEventListener('DOMContentLoaded', function() {
             dayNumberEl.textContent = i;
             day.appendChild(dayNumberEl);
             
-            // Crear clave para eventos (formato: YYYY-MM-DD)
-            const dateKey = formatDateKey(i);
+            // Formatear fecha clave (YYYY-MM-DD)
+            const dateKey = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
             
             // Mostrar eventos para este día
-            renderEventsForDay(day, dateKey);
-            
-            // Agregar evento para crear nuevo evento
-            day.addEventListener('click', () => openModal(dateKey));
+            if (events[dateKey]) {
+                events[dateKey].forEach(event => {
+                    const eventEl = document.createElement('div');
+                    eventEl.className = 'event';
+                    eventEl.innerHTML = `${event.emoji} ${event.desc}`;
+                    day.appendChild(eventEl);
+                });
+            }
             
             calendarEl.appendChild(day);
         }
     }
     
-    function renderNextMonthDays(startDay, daysInCurrentMonth) {
+    function fillNextMonthDays(startDay, daysInCurrentMonth) {
         const totalDaysShown = startDay + daysInCurrentMonth;
         const remainingDays = 7 - (totalDaysShown % 7);
         
@@ -148,65 +148,54 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function formatDateKey(day) {
-        return `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    }
-    
-    function renderEventsForDay(dayElement, dateKey) {
-        if (events[dateKey]) {
-            events[dateKey].forEach(event => {
-                const eventEl = document.createElement('div');
-                eventEl.className = 'event';
-                eventEl.innerHTML = `${event.emoji} ${event.desc}`;
-                dayElement.appendChild(eventEl);
-                
-                // Agregar evento para eliminar al hacer doble click
-                eventEl.addEventListener('dblclick', (e) => {
-                    e.stopPropagation();
-                    if (confirm('¿Eliminar este evento?')) {
-                        deleteEvent(dateKey, event);
-                    }
-                });
-            });
-        }
-    }
-    
-    function deleteEvent(dateKey, eventToDelete) {
-        events[dateKey] = events[dateKey].filter(event => event !== eventToDelete);
-        if (events[dateKey].length === 0) {
-            delete events[dateKey];
-        }
-        localStorage.setItem('calendarEvents', JSON.stringify(events));
-        renderCalendar();
-    }
-    
     function saveEvent() {
+        const date = new Date(eventDateEl.value);
         const desc = eventDescEl.value.trim();
-        const emoji = eventEmojiEl.value.trim();
+        const emoji = eventEmojiEl.value.trim() || '📅';
         
-        if (desc) {
-            // Validar que el emoji no esté vacío
-            const finalEmoji = emoji || '📅';
-            
-            // Crear clave de fecha si no existe
-            if (!events[selectedDate]) {
-                events[selectedDate] = [];
-            }
-            
-            // Agregar nuevo evento
-            events[selectedDate].push({
-                emoji: finalEmoji,
-                desc: desc
-            });
-            
-            // Guardar en localStorage
-            localStorage.setItem('calendarEvents', JSON.stringify(events));
-            
-            // Cerrar modal y actualizar calendario
-            closeModal();
-            renderCalendar();
-        } else {
+        // Validaciones
+        if (!desc) {
             alert('Por favor ingresa una descripción para el evento');
+            return;
         }
+        
+        if (isNaN(date.getTime())) {
+            alert('Por favor selecciona una fecha válida');
+            return;
+        }
+        
+        // Formatear la clave de fecha (YYYY-MM-DD)
+        const dateKey = formatDateKey(date);
+        
+        // Crear o actualizar eventos para esta fecha
+        if (!events[dateKey]) {
+            events[dateKey] = [];
+        }
+        
+        // Agregar nuevo evento
+        events[dateKey].push({
+            emoji: emoji,
+            desc: desc,
+            createdAt: new Date().toISOString()
+        });
+        
+        // Guardar en localStorage
+        localStorage.setItem('calendarEvents', JSON.stringify(events));
+        
+        // Limpiar formulario (excepto la fecha)
+        eventDescEl.value = '';
+        eventEmojiEl.value = '';
+        
+        // Actualizar calendario
+        renderCalendar();
+        
+        console.log('Evento guardado:', { dateKey, events: events[dateKey] });
+    }
+    
+    function formatDateKey(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     }
 });
