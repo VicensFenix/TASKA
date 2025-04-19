@@ -65,11 +65,11 @@
         <!-- Contenedor del calendario -->
         <div class="container">
             <!-- Encabezado del calendario (mes/año y controles) -->
-            <h1>Calendario Interactivo</h1>
+            <h1 class="title">Calendario Interactivo</h1>
             <div class="month-controls">
-                <button id="prev-month">← Mes Anterior</button>
+                <button class="btn-month" id="prev-month">← Mes Anterior</button>
                 <h2 id="current-month">Mes y Año</h2>
-                <button id="next-month">Mes Siguiente →</button>
+                <button class="btn-month" id="next-month">Mes Siguiente →</button>
             </div>
             <div class="calendar" id="calendar">
             <!-- Los días del calendario se generarán con JavaScript -->
@@ -78,25 +78,37 @@
             <!-- Modal para agregar eventos -->
             <div class="modal" id="event-modal">
                 <div class="modal-content">
-                    <h3>Agregar Evento</h3>
+                    <h3 class="subtitle">Agregar Evento</h3>
+                    <label 
+                        class="label-modal" 
+                        for="event-emoji">
+                        Emoji:
+                    </label>
+                    <input 
+                        class="input-modal"
+                        type="text" 
+                        id="event-emoji" 
+                        placeholder="Agregue un emoji ⛏" 
+                    >
+                </div>
                 <div>
-                <label for="event-emoji">Emoji:</label>
-                <input 
-                    type="text" 
-                    id="event-emoji" 
-                    placeholder="Agregue un emoji ⛏" 
-                >
+                    <label 
+                        class="label-modal" 
+                        for="event-desc">
+                        Descripción:
+                    </label>
+                    <input 
+                        class="input-modal"
+                        type="text" 
+                        id="event-desc" 
+                        placeholder="¿Qué harás este día?"
+                    >
+                </div>
+                <div>
+                    <button class="btn-event" id="save-event">Guardar Evento</button>
+                    <button class="btn-event" id="cancel-event">Cancelar</button>
+                </div>
             </div>
-            <div>
-                <label for="event-desc">Descripción:</label>
-                <input type="text" id="event-desc" placeholder="¿Qué harás este día?">
-            </div>
-            <div>
-                <button id="save-event">Guardar Evento</button>
-                <button id="cancel-event">Cancelar</button>
-            </div>
-        </div>
-    </div>
 
         </div>
 
