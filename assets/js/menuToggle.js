@@ -1,32 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const aside = document.querySelector('.aside');
-    const menuToggle = document.querySelector('.menuToogle');
-    const menuIcon = menuToggle.querySelector('.iconMenuToggle');
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggleBtn');
+    const sidebar = document.getElementById('sidebar');
 
-    // Verificar el tamaño de la pantalla al cargar
-    function checkScreenSize() {
-        if (window.innerWidth <= 768) {
-            aside.classList.add('collapsed');
-        } else {
-            aside.classList.remove('collapsed');
-        }
-    }
-
-    // Toggle del menú en móvil/tablet
-    menuToggle.addEventListener('click', function() {
-        if (window.innerWidth <= 768) {
-            aside.classList.toggle('expanded');
-        } else {
-            aside.classList.toggle('collapsed');
-        }
-
-        // Cambiar icono (menu/close)
-        menuIcon.forEach(icon => icon.classList.toggle('active'));
+    // Alternar estado al hacer clic
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        
+        // Opcional: Guardar estado en localStorage
+        localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
     });
 
-    // Escuchar cambios de tamaño de pantalla
-    window.addEventListener('resize', checkScreenSize);
-
-    // Inicializar
-    checkScreenSize();
+    // Opcional: Cargar estado al recargar la página
+    if (localStorage.getItem('sidebarCollapsed') === 'true') {
+        sidebar.classList.add('collapsed');
+    }
 });
