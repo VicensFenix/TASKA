@@ -5,45 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="Logo_TASKA.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="/assets/js/menuToogle.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;600&family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/sidebar.css">
     <title>TASKA</title>
 </head>
 <body>
 
     <!-- Barra lateral -->
-    <aside>
+    <aside class="aside">
         
-        <!-- Contenedor informativo -->
-        <div>
-            <img src="/assets/img/Logo_TASKA.png" alt="Logo de la APP">
-            <h1>Menú</h1>
+        <!-- Contenedor del encabezado -->
+        <header class="header">
+            <h1 class="maintitle">TASKA</h1>
+            <img class="imgLogo" src="/assets/img/Logo_TASKA.png" alt="Logo de la APP">
+        </header>
+
+        <!-- Contenedor del Menú  -->
+        <div class="contentMenu">
+            <h2 class="subtitleSideBar">Menú</h2>
+
+            <!-- Botón para expandir el SideBar -->
+            <button class="menuToogle">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </button>
         </div>
 
-        <!-- Botón para expandir el SideBar -->
-        <button>
-            <span class="material-symbols-outlined">
-                menu
-            </span>
-            <span class="material-symbols-outlined">
-                close
-            </span>
-        </button>
+        <!-- Menú navegable -->
+        <nav class="nav">
 
-        <nav>
+            <ul class="listNav">
 
-            <ul>
-
-                <li>
-                    <span class="material-symbols-outlined">
+                <li class="itemNav">
+                    <span class="iconNav material-symbols-outlined">
                         fact_check
                     </span>
-                    <a href="">Tareas</a>
+                    <a class="linkNav" href="">Tareas</a>
                 </li>
-                <li>
-                    <span class="material-symbols-outlined">
+                <li class="itemNav">
+                    <span class="iconNav material-symbols-outlined">
                         calendar_month
                     </span>
-                    <a href="">Calendario</a>
+                    <a class="linkNav" href="">Calendario</a>
                 </li>
 
             </ul>

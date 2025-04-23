@@ -1,0 +1,125 @@
+/* ESTILOS GENERALES DE LA WEB */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* Fondos */
+    --bg-sidebar: #0d0d0b;
+    --bg-icon: #0d0d0b;
+
+    /* Colores */
+    --main-title-color: #ffffff;
+    --main-subtitleSidebar-color: #ffffff;
+    --icon-menuToggle-color: #d4d5da;
+    --icon-menuToggle-colorHover: #0e7ae6;
+    --itemNav-color-hover: #0e7ae6;
+    --iconNav-color: #ffffff;
+    --linkNav-color: #ffffff;
+
+    /* Topografías */
+    --family-letter-sidebarMaintitle: 'Montserrat', sans-serif;
+    --famlily-letter-linkSidebar: 'Poppins', sans-serif;
+    --family-letter-subtitleSidebar: 'Lobster', sans-serif;
+
+    /* Tamaño de letra */
+    --font-size-sidebarMaintitle: 2rem;
+    --font-size-subtitleSidebar: 1.5rem;
+    --font-size-iconMenu: 1.5rem;
+    --font-size-IconNav: 1rem;
+    --font-size-linkNav: 1rem;
+}
+
+/* Estilos del html y body */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos del aside */
+.aside {
+    width: 250px;
+    height: 100%;
+    background: var(--bg-sidebar);
+    position: fixed;
+}
+
+.header {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-left: 12px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-bottom: 3px solid white;
+}
+
+.maintitle {
+    color: var(--main-title-color);
+    font-family: var(--family-letter-sidebarMaintitle);
+    font-size: var(--font-size-sidebarMaintitle);
+}
+
+.imgLogo {
+    padding-left: 16px;
+    height: 100px;
+    width: 100px;
+}
+
+.contentMenu {
+    padding-top: 12px;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+}
+
+.subtitleSideBar {
+    color: var(--main-subtitleSidebar-color);
+    font-family: var(--family-letter-sidebarMaintitle);
+    font-size: var(--font-size-subtitleSidebar);
+    margin-left: 15px;
+}
+
+.menuToogle {
+    background: var(--bg-icon);
+    color: var(--icon-menuToggle-color);
+    margin-right: 15px;
+    border: none;
+    font-size: var(--font-size-iconMenu);
+}
+
+.menuToogle:hover {
+    color: var(--icon-menuToggle-colorHover);
+}
+
+.nav {
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.itemNav {
+    padding-left: 15px;
+}
+
+.itemNav:hover {
+    width: 100%;
+    background: var(--itemNav-color-hover);
+    padding-left: 22px;
+}
+
+.iconNav {
+    color: var(--iconNav-color);
+    font-size: var(--font-size-IconNav);
+}
+
+.linkNav {
+    color: var(--linkNav-color);
+    font-family: var(--famlily-letter-linkSidebar);
+    font-size: var(--font-size-linkNav);
+    text-decoration: none;
+}
