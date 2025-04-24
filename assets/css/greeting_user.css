@@ -35,3 +35,7 @@
     font-family: var(--family-letter-strongUser);
     font-size: var(--font-size-strongUser);
 }
+
+.conteiner-clock {
+    margin-left: 100px;
+}

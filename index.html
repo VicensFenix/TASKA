@@ -25,6 +25,7 @@
     <!-- Scripts -->
     <script src="/assets/js/menuToggle.js"></script>
     <script src="/assets/js/setUserName.js"></script>
+    <script src="/assets/js/updateClock.js"></script>
 
     <title>TASKA</title>
 </head>
@@ -78,19 +79,29 @@
 
     </aside>  
 
-    <!-- Sección principal -->
-    <main>
+    <!-- Sección de Hora en tiempo real -->
+    <section>
 
-        <!-- Sección de saludo al Usuario -->
-        <section class="section-user">
+        <!-- Contenedor de la hora en tiempo real -->
+        <div class="conteiner-clock">
 
-            <div class="content-user">
-                <p class="text-user">Bienvenido: <strong id="nameUser" class="strong-user">Usuario</strong></p>
-            </div>
+            <h4 class="time-clock"></h4>
 
-        </section>
+        </div>
 
-    </main>
+    </section>
+
+    <!-- Sección de saludo al Usuario -->
+    <section class="section-user">
+
+        <!-- Contenedor del saludo -->
+        <div class="content-user">
+            <p class="text-user">Bienvenido: <strong id="nameUser" class="strong-user">Usuario</strong></p>
+        </div>
+
+    </section>
+
+    
 
 </body>
 </html>
