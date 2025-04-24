@@ -1,0 +1,37 @@
+/* ESTILOS GENERALES DE LA WEB */
+* {
+
+    /* Colores */
+    --textUser-color: #111111;
+    --strongUser-color: #000000;
+
+    /* Topografías */
+    --famlily-letter-textUser: 'Poppins', sans-serif;
+    --family-letter-strongUser: 'Lobster', sans-serif;
+
+    /* Tamaño de letra */
+    --font-size-textUser: 1.2rem;
+    --font-size-strongUser: 1.5rem;
+}
+
+/* Sección usuario estilos */
+.section-user {
+    margin-left: 100px;
+    display: flex;
+    padding-top: 2rem;
+}
+
+.content-user {
+    display: block;
+    font-style: italic;
+}
+
+.text-user {
+    font-family: var(--famlily-letter-textUser);
+    font-size: var(--font-size-textUser);
+}
+
+.strong-user {
+    font-family: var(--family-letter-strongUser);
+    font-size: var(--font-size-strongUser);
+}
