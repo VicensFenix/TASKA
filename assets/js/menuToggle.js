@@ -1,17 +1,29 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const toggleBtn = document.getElementById('toggleBtn');
-    const sidebar = document.getElementById('sidebar');
+// Función para colapsar el sidebar
+function setupCollapsibleSidebar(toggleBtnId, sidebarId, persistState = false) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById(toggleBtnId);
+        const sidebar = document.getElementById(sidebarId);
 
-    // Alternar estado al hacer clic
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('collapsed');
-        
-        // Opcional: Guardar estado en localStorage
-        localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+        if (!toggleBtn || !sidebar) {
+            console.error('No se encontraron los elementos requeridos');
+            return;
+        }
+
+        // Alternar estado al hacer clic
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            
+            if (persistState) {
+                localStorage.setItem(`${sidebarId}-collapsed`, sidebar.classList.contains('collapsed'));
+            }
+        });
+
+        // Cargar estado persistido si está habilitado
+        if (persistState && localStorage.getItem(`${sidebarId}-collapsed`) === 'true') {
+            sidebar.classList.add('collapsed');
+        }
     });
+}
 
-    // Opcional: Cargar estado al recargar la página
-    if (localStorage.getItem('sidebarCollapsed') === 'true') {
-        sidebar.classList.add('collapsed');
-    }
-});
+// LLamar a la función
+setupCollapsibleSidebar('toggleBtn', 'sidebar', true);
