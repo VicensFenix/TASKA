@@ -23,59 +23,84 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCalendarTitle(currentDate);
     }
 
-    // Renderizar calendario
+    // Renderizar calendario con todos los días
     function renderCalendar(date) {
         calendarDays.innerHTML = '';
         
         const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
         const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         const daysInMonth = lastDayOfMonth.getDate();
-        const startingDay = firstDayOfMonth.getDay();
+        const startingDay = firstDayOfMonth.getDay(); // 0=Domingo, 6=Sábado
         
-        // Calcular total de celdas necesarias (6 semanas)
+        // 1. Días del mes anterior para completar la primera semana
+        const prevMonthLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+        for (let i = 0; i < startingDay; i++) {
+            const dayNumber = prevMonthLastDay - startingDay + i + 1;
+            const dayElement = createDayElement(dayNumber, true);
+            calendarDays.appendChild(dayElement);
+        }
+        
+        // 2. Días del mes actual
+        const today = new Date();
+        for (let i = 1; i <= daysInMonth; i++) {
+            const dayDate = new Date(date.getFullYear(), date.getMonth(), i);
+            const isToday = dayDate.toDateString() === today.toDateString();
+            const dayElement = createDayElement(i, false, isToday, dayDate);
+            
+            // Agregar eventos si existen
+            const dayEvents = getEventsForDate(dayDate);
+            dayEvents.forEach(event => {
+                addEventToDay(dayElement, event);
+            });
+            
+            calendarDays.appendChild(dayElement);
+        }
+        
+        // 3. Días del próximo mes para completar 6 semanas (42 días)
         const totalCells = 42;
+        const daysShown = startingDay + daysInMonth;
+        const remainingCells = totalCells - daysShown;
         
-        // Crear todas las celdas del calendario
-        for (let i = 0; i < totalCells; i++) {
-            const dayElement = document.createElement('div');
-            dayElement.className = 'calendar-day';
-            
-            // Determinar si es un día del mes actual
-            if (i >= startingDay && i < startingDay + daysInMonth) {
-                const dayNumber = i - startingDay + 1;
-                const dayDate = new Date(date.getFullYear(), date.getMonth(), dayNumber);
-                
-                // Marcar día actual
-                const today = new Date();
-                if (dayDate.toDateString() === today.toDateString()) {
-                    dayElement.classList.add('current-day');
-                }
-                
-                dayElement.innerHTML = `
-                    <div class="day-number">${dayNumber}</div>
-                    <div class="day-events"></div>
-                `;
-                
-                // Agregar eventos existentes
-                const dayEvents = getEventsForDate(dayDate);
-                dayEvents.forEach(event => {
-                    addEventToDay(dayElement, event);
-                });
-                
-                // Hacer el día clickable para agregar eventos
-                dayElement.addEventListener('click', () => {
-                    openModalForDate(dayDate);
-                });
-            } else {
-                // Celda vacía para mantener la cuadrícula
-                dayElement.classList.add('empty-day');
-            }
-            
+        for (let i = 1; i <= remainingCells; i++) {
+            const dayElement = createDayElement(i, true);
             calendarDays.appendChild(dayElement);
         }
     }
 
-    // Agregar evento a un día específico
+    // Crear elemento de día
+    function createDayElement(dayNumber, isOtherMonth, isToday = false, date = null) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+        
+        if (isOtherMonth) {
+            dayElement.classList.add('other-month');
+        }
+        if (isToday) {
+            dayElement.classList.add('current-day');
+        }
+        if (date) {
+            dayElement.dataset.date = date.toISOString().split('T')[0]; // Solo la fecha sin hora
+        }
+        
+        dayElement.innerHTML = `
+            <div class="day-number">${dayNumber}</div>
+            <div class="day-events"></div>
+        `;
+        
+        // Hacer el día clickable para agregar eventos
+        if (!isOtherMonth && date) {
+            dayElement.addEventListener('click', (e) => {
+                // Evitar que se active al hacer clic en eventos
+                if (e.target === dayElement || e.target.classList.contains('day-number')) {
+                    openModalForDate(date);
+                }
+            });
+        }
+        
+        return dayElement;
+    }
+
+    // Agregar evento a un día
     function addEventToDay(dayElement, event) {
         const eventsContainer = dayElement.querySelector('.day-events');
         const eventElement = document.createElement('div');
@@ -84,10 +109,12 @@ document.addEventListener('DOMContentLoaded', function() {
         eventElement.innerHTML = `
             <div class="event-content">
                 <span class="material-symbols-outlined">${event.icon}</span>
-                ${event.name}
+                <span class="event-name">${event.name}</span>
             </div>
             <div class="event-actions">
-                <button class="delete-event" data-event-id="${event.id}">×</button>
+                <button class="delete-event" data-event-id="${event.id}">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
             </div>
         `;
         
@@ -112,10 +139,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Obtener eventos para una fecha específica
     function getEventsForDate(date) {
-        return events.filter(event => {
-            const eventDate = new Date(event.date);
-            return eventDate.toDateString() === date.toDateString();
-        });
+        const dateString = date.toISOString().split('T')[0];
+        return events.filter(event => event.date === dateString);
     }
 
     // Actualizar título del calendario
