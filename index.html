@@ -12,7 +12,7 @@
     <meta name="robots" content="index, nofollow">
 
     <!-- Links -->
-    <link rel="stylesheet" href="/assets/css/sidebar.css">
+    <link rel="stylesheet" href="/assets/css/nav.css">
     <link rel="stylesheet" href="/assets/css/sectionTask.css">
     <link rel="shortcut icon" href="Logo_TASKA.ico" type="image/x-icon">
 
@@ -29,64 +29,51 @@
 </head>
 <body>
 
-    <!-- Barra lateral -->
-    <aside id="sidebar" class="aside">
-        
+    <!-- Barra de navegación superior -->
+    <nav id="navbar" class="navbar">
+    
         <!-- Contenedor del encabezado -->
-        <header class="header">
-            <h1 class="maintitle">TASKA</h1>
+        <div class="navbar-header">
             <img class="img-logo" src="/assets/img/Logo_TASKA.png" alt="Logo de la APP">
-        </header>
-
-        <!-- Contenedor del Menú  -->
-        <div class="content-menu">
-            <h2 class="subtitle-sidebar">Menú</h2>
-
-            <!-- Botón para expandir el SideBar -->
-            <button id="toggleBtn" class="menu-toogle">
-                <span class="icon-menutoggle material-symbols-outlined">
+            <h1 class="maintitle">TASKA</h1>
+        
+            <!-- Botón para expandir/contraer el NavBar -->
+            <button id="toggleBtn" class="menu-toggle">
+                <span class="icon-close material-symbols-outlined">
                     close
                 </span>
-                <span class="icon-menutoggle material-symbols-outlined">
+                <span class="icon-menu material-symbols-outlined">
                     menu
                 </span>
             </button>
         </div>
 
         <!-- Menú navegable -->
-        <nav class="nav">
+        <div class="nav-container">
 
             <ul class="list-nav">
-
-                <li class="item-nav">
-                    <span class="icon-nav material-symbols-outlined">
-                        home
-                    </span>
-                    <a class="link-nav" href="index.html">Inicio</a>
-                </li>
                 <li class="item-nav">
                     <span class="icon-nav material-symbols-outlined">
                         fact_check
                     </span>
-                    <a class="link-nav" href="index.html">Tareas</a>
+                    <a class="link-nav" href="index.html#theTask">Tareas</a>
                 </li>
                 <li class="item-nav">
                     <span class="icon-nav material-symbols-outlined">
                         calendar_month
                     </span>
-                    <a class="link-nav" href="">Calendario</a>
+                    <a class="link-nav" href="/pages/calendar.html">Calendario</a>
                 </li>
-
             </ul>
 
-        </nav>
+        </div>
 
-    </aside>  
+    </nav>
 
     <main class="main">
 
         <!-- Sección de lista de tareas -->
-        <section class="section-task">
+        <section id="theTask" class="section-task">
 
             <!-- Contenedor de crear tareas -->
             <div class="content-task">

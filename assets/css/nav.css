@@ -1,0 +1,298 @@
+/* ESTILOS GENERALES DE LA WEB */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* Colores */
+    --bg-navbar: #0d0d0b;
+    --main-title-color: #ffffff;
+    --icon-menu-color: #ffffff;
+    --icon-menu-hover: #0e7ae6;
+    --itemNav-color-hover: #0e7ae6;
+    --iconNav-color: #ffffff;
+    --linkNav-color: #ffffff;
+
+    /* Tipografías */
+    --family-letter-navMaintitle: 'Montserrat', sans-serif;
+    --family-letter-linkNav: 'Poppins', sans-serif;
+
+    /* Tamaños */
+    --font-size-navMaintitle: 1.5rem;
+    --font-size-linkNav: 1rem;
+    --navbar-height: 60px;
+    --transition-speed: 0.3s;
+}
+
+/* ===== ESTILOS DEL NAVBAR ===== */
+.navbar {
+    width: 100vw;
+    max-width: 100%;
+    height: var(--navbar-height);
+    background: var(--bg-navbar);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    transition: height var(--transition-speed) ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Header del navbar */
+.navbar-header {
+    width: 100%;
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    justify-content: space-between;
+    background: var(--bg-navbar);
+    z-index: 101;
+}
+
+.maintitle {
+    color: var(--main-title-color);
+    font-family: var(--family-letter-navMaintitle);
+    font-size: var(--font-size-navMaintitle);
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.img-logo {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+}
+
+/* Botón de toggle */
+.menu-toggle {
+    background: transparent;
+    color: var(--icon-menu-color);
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all var(--transition-speed) ease;
+    padding: 5px;
+    z-index: 102;
+}
+
+.menu-toggle:hover {
+    color: var(--icon-menu-hover);
+    transform: scale(1.1);
+}
+
+/* Mostrar solo el icono correspondiente */
+.navbar:not(.expanded) .icon-close,
+.navbar.expanded .icon-menu {
+    display: none;
+}
+
+/* Contenedor del menú */
+.nav-container {
+    width: 100%;
+    background: var(--bg-navbar);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: 
+        opacity var(--transition-speed) ease,
+        max-height var(--transition-speed) ease;
+    padding: 0 5%;
+    will-change: max-height, opacity;
+}
+
+/* Lista de navegación */
+.list-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 0;
+    margin: 0;
+    width: 100%;
+}
+
+.item-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    transition: all var(--transition-speed) ease;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: 
+        transform var(--transition-speed) ease,
+        opacity var(--transition-speed) ease;
+    width: 100%;
+}
+
+.item-nav:hover {
+    color: var(--itemNav-color-hover);
+}
+
+.icon-nav {
+    color: var(--iconNav-color);
+    font-size: 1.2rem;
+    min-width: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.link-nav {
+    color: var(--linkNav-color);
+    font-family: var(--family-letter-linkNav);
+    font-size: var(--font-size-linkNav);
+    text-decoration: none;
+    transition: all var(--transition-speed) ease;
+    white-space: nowrap;
+    width: 100%;
+    display: block;
+}
+
+.item-nav:hover .link-nav,
+.item-nav:hover .icon-nav {
+    color: var(--itemNav-color-hover);
+}
+
+/* ===== NAVBAR EXPANDIDO ===== */
+.navbar.expanded {
+    height: auto;
+    min-height: var(--navbar-height);
+    overflow: visible;
+}
+
+.navbar.expanded .nav-container {
+    opacity: 1;
+    max-height: 100vh;
+    padding: 10px 5% 30px;
+    overflow-y: auto;
+}
+
+.navbar.expanded .item-nav {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: calc(var(--transition-speed) / 2);
+}
+
+/* ===== RESPONSIVE PARA MÓVILES ===== */
+@media (max-width: 767px) {
+    .navbar {
+        overflow-x: clip;
+    }
+    
+    .navbar.expanded {
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        height: 100vh;
+    }
+
+    .navbar-header {
+        padding: 0 20px;
+    }
+
+    .nav-container {
+        padding: 0 20px;
+    }
+
+    .navbar.expanded .nav-container {
+        padding: 10px 20px 30px;
+    }
+}
+
+/* ===== VERSIÓN DESKTOP ===== */
+@media (min-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5%;
+        height: var(--navbar-height) !important;
+        overflow: visible !important;
+    }
+    
+    .nav-container {
+        opacity: 1 !important;
+        max-height: none !important;
+        height: auto !important;
+        width: auto;
+        padding: 0 !important;
+        flex-direction: row;
+        overflow: visible !important;
+        background: transparent;
+    }
+    
+    .list-nav {
+        flex-direction: row;
+        gap: 25px;
+        padding: 0 !important;
+        width: auto;
+    }
+    
+    .item-nav {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        padding: 0 !important;
+        width: auto;
+    }
+    
+    .menu-toggle {
+        display: none;
+    }
+    
+    .navbar-header {
+        width: auto;
+        padding: 0;
+    }
+
+    .link-nav {
+        width: auto;
+        padding: 5px 0;
+        position: relative;
+    }
+
+    .link-nav::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--itemNav-color-hover);
+        transition: width var(--transition-speed) ease;
+    }
+
+    .item-nav:hover .link-nav::after {
+        width: 100%;
+    }
+}
+
+/* ===== EFECTOS Y TRANSICIONES ===== */
+.navbar,
+.nav-container,
+.item-nav,
+.menu-toggle,
+.link-nav,
+.icon-nav {
+    transition: all var(--transition-speed) ease;
+}
+
+/* Mejora de rendimiento para animaciones */
+.nav-container {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Asegurar que no haya scroll horizontal */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}

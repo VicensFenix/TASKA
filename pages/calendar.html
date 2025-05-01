@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página web para ir siguiendo tus tareas y aparte tener un calendario donde puedes agregar tus eventos importantes">
+    <meta name="author" content="Vicente">
+    <meta name="application-name" content="TASKA">
+    <meta name="generator" content="VSCode">
+    <meta name="google" content="nositelinkssearchbox">
+    <meta name="robots" content="index, nofollow">
+
+    <!-- Links -->
+    <link rel="stylesheet" href="/assets/css/nav.css">
+    <link rel="stylesheet" href="/assets/css/sectionTask.css">
+    <link rel="stylesheet" href="/assets/css/calendar.css">
+    <link rel="shortcut icon" href="Logo_TASKA.ico" type="image/x-icon">
+
+    <!-- APIS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;600&family=Lobster&display=swap" rel="stylesheet">
+    
+
+    <!-- Scripts -->
+    <script src="/assets/js/menuToggle.js"></script>
+
+    <title>Calendario de eventos | TASKA</title>
+</head>
+<body>
+    
+    <!-- Barra de navegación superior -->
+    <nav id="navbar" class="navbar">
+    
+        <!-- Contenedor del encabezado -->
+        <div class="navbar-header">
+            <img class="img-logo" src="/assets/img/Logo_TASKA.png" alt="Logo de la APP">
+            <h1 class="maintitle">TASKA</h1>
+        
+            <!-- Botón para expandir/contraer el NavBar -->
+            <button id="toggleBtn" class="menu-toggle">
+                <span class="icon-close material-symbols-outlined">
+                    close
+                </span>
+                <span class="icon-menu material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+        </div>
+
+        <!-- Menú navegable -->
+        <div class="nav-container">
+
+            <ul class="list-nav">
+                <li class="item-nav">
+                    <span class="icon-nav material-symbols-outlined">
+                        fact_check
+                    </span>
+                    <a class="link-nav" href="/index.html">Tareas</a>
+                </li>
+                <li class="item-nav">
+                    <span class="icon-nav material-symbols-outlined">
+                        calendar_month
+                    </span>
+                    <a class="link-nav" href="/pages/calendar.html">Calendario</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <div class="calendar-nav">
+                    <button id="prev"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <button id="today">Hoy</button>
+                    <button id="next"><span class="material-symbols-outlined">chevron_right</span></button>
+                </div>
+                <h2 id="calendar-title" class="calendar-title">Mes y Año</h2>
+                <div class="calendar-actions">
+                    <button id="add-event" class="add-event-btn">
+                        <span class="material-symbols-outlined">add</span> Evento
+                    </button>
+                </div>
+            </div>
+        
+            <!-- Encabezados de días de la semana -->
+            <div class="calendar-weekdays" id="weekdays-header">
+                <div>Dom</div>
+                <div>Lun</div>
+                <div>Mar</div>
+                <div>Mié</div>
+                <div>Jue</div>
+                <div>Vie</div>
+                <div>Sáb</div>
+            </div>
+        
+            <!-- Contenedor principal de días -->
+            <div id="calendar-days" class="calendar-days">
+                <!-- Los días se generarán dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para agregar eventos -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Agregar Evento</h3>
+                <button id="close-modal" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="event-date">Fecha:</label>
+                    <input type="date" id="event-date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="event-name">Nombre:</label>
+                    <input type="text" id="event-name" class="form-control" placeholder="Nombre del evento">
+                </div>
+                <div class="form-group">
+                    <label for="event-icon">Icono:</label>
+                    <select id="event-icon" class="form-control">
+                        <option value="event">Evento</option>
+                        <option value="meeting">Reunión</option>
+                        <option value="cake">Cumpleaños</option>
+                        <option value="work">Trabajo</option>
+                        <option value="medical_services">Médico</option>
+                        <option value="flight">Viaje</option>
+                    </select>
+                </div>
+                <button id="save-event" class="save-btn">Guardar Evento</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="/assets/js/calendar.js"></script>
+</body>
+</html>
