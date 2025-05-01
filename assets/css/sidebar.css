@@ -28,6 +28,11 @@
     --font-size-iconMenu: 1.5rem;
     --font-size-IconNav: 1rem;
     --font-size-linkNav: 1rem;
+
+    /* Nuevas variables para layout */
+    --sidebar-expanded-width: 250px;
+    --sidebar-collapsed-width: 80px;
+    --transition-speed: 0.3s;
 }
 
 /* Estilos del html y body */
@@ -37,27 +42,30 @@ html, body {
     padding: 0;
 }
 
-/* Estilos del aside */
+/* ===== ESTILOS DEL ASIDE ===== */
 .aside {
-    transition: width 0.3s ease;
-    width: 250px;
-    overflow: hidden;
-    height: 100%;
+    transition: all var(--transition-speed) ease;
+    width: var(--sidebar-expanded-width);
+    height: 100vh;
     background: var(--bg-sidebar);
     position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
 /* Header styles */
 .header {
-    width: 250px;
+    width: 100%;
     display: flex;
     align-items: center;
-    text-align: center;
-    padding-left: 12px;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding: 24px 12px;
     border-bottom: 3px solid white;
-    transition: all 0.3s ease;
+    transition: all var(--transition-speed) ease;
+    flex-shrink: 0;
 }
 
 .maintitle {
@@ -65,77 +73,82 @@ html, body {
     font-family: var(--family-letter-sidebarMaintitle);
     font-size: var(--font-size-sidebarMaintitle);
     white-space: nowrap;
+    transition: all var(--transition-speed) ease;
 }
 
 .img-logo {
     padding-left: 16px;
     height: 100px;
     width: 100px;
-    transition: all 0.3s ease;
+    transition: all var(--transition-speed) ease;
+    object-fit: contain;
 }
 
 /* Content menu styles */
 .content-menu {
-    padding-top: 12px;
-    display: grid;
-    grid-auto-flow: column;
-    gap: 10px;
+    padding: 12px 15px 0;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .subtitle-sidebar {
     color: var(--main-subtitleSidebar-color);
     font-family: var(--family-letter-sidebarMaintitle);
     font-size: var(--font-size-subtitleSidebar);
-    margin-left: 15px;
     white-space: nowrap;
+    transition: all var(--transition-speed) ease;
 }
 
 /* Toggle button styles */
 .menu-toogle {
     background: var(--bg-icon);
     color: var(--icon-menuToggle-color);
-    margin-right: 15px;
     border: none;
     font-size: var(--font-size-iconMenu);
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: all var(--transition-speed) ease;
+    padding: 8px;
+    border-radius: 4px;
 }
 
 .menu-toogle:hover {
     color: var(--icon-menuToggle-colorHover);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Navigation styles */
 .nav {
-    padding-top: 12px;
+    padding: 12px 0;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    gap: 6px;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
 .list-nav {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .item-nav {
-    padding-left: 15px;
+    padding: 0 15px;
     display: flex;
     align-items: center;
     gap: 10px;
     height: 40px;
-    transition: all 0.3s ease;
+    transition: all var(--transition-speed) ease;
     position: relative;
 }
 
 .item-nav:hover {
-    width: 100%;
     background: var(--itemNav-color-hover);
-    padding-left: 22px;
 }
 
 .icon-nav {
@@ -144,6 +157,7 @@ html, body {
     min-width: 24px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .link-nav {
@@ -152,17 +166,17 @@ html, body {
     font-size: var(--font-size-linkNav);
     text-decoration: none;
     white-space: nowrap;
+    transition: all var(--transition-speed) ease;
 }
 
-/* --- Estilos para el modo colapsado --- */
+/* ===== MODO COLAPSADO ===== */
 .aside.collapsed {
-    width: 80px; /* Ancho reducido */
+    width: var(--sidebar-collapsed-width);
 }
 
 .aside.collapsed .header {
-    width: 80px;
     justify-content: center;
-    padding-left: 0;
+    padding: 24px 0;
 }
 
 .aside.collapsed .maintitle,
@@ -170,28 +184,22 @@ html, body {
 .aside.collapsed .subtitle-sidebar,
 .aside.collapsed .link-nav {
     display: none;
+    opacity: 0;
 }
 
-/* Ajuste del botón de toggle */
 .aside.collapsed .menu-toogle {
-    margin-right: 0;
+    margin: 0 auto;
 }
 
-/* Iconos: muestra "close" cuando está colapsado */
-.aside:not(.collapsed) .icon-menutoggle:last-child,
-.aside.collapsed .icon-menutoggle:first-child {
-    display: none;
-}
-
-/* Ajustes para los ítems del menú en modo colapsado */
 .aside.collapsed .item-nav {
-    padding-left: 0;
+    padding: 0;
     justify-content: center;
 }
 
-.aside.collapsed .item-nav:hover {
-    padding-left: 0 !important;
-    background: var(--itemNav-color-hover);
+/* Iconos toggle */
+.aside:not(.collapsed) .icon-menutoggle:last-child,
+.aside.collapsed .icon-menutoggle:first-child {
+    display: none;
 }
 
 /* Tooltip para modo colapsado */
@@ -203,18 +211,57 @@ html, body {
     transform: translateY(-50%);
     background: var(--bg-sidebar);
     color: var(--iconNav-color);
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 4px;
     margin-left: 10px;
     white-space: nowrap;
     font-family: var(--famlily-letter-linkSidebar);
+    font-size: var(--font-size-linkNav);
     z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Transiciones suaves */
+/* ===== RESPONSIVE PARA MÓVILES ===== */
+@media (max-width: 768px) {
+    .aside {
+        transform: translateX(-100%);
+        width: 280px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .aside.collapsed {
+        transform: translateX(0);
+        width: var(--sidebar-collapsed-width);
+    }
+    
+    /* Botón de toggle flotante */
+    .menu-toogle {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 101;
+        background: var(--bg-sidebar);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .aside.collapsed .menu-toogle {
+        left: calc(var(--sidebar-collapsed-width) + 15px);
+    }
+    
+    /* Ajustar tooltip en móvil */
+    .aside.collapsed .item-nav:hover::after {
+        left: calc(100% + 5px);
+    }
+}
+
+/* ===== TRANSICIONES ===== */
 .aside,
 .header,
 .menu-toogle,
-.item-nav {
-    transition: all 0.3s ease;
+.item-nav,
+.link-nav,
+.maintitle,
+.img-logo,
+.subtitle-sidebar {
+    transition: all var(--transition-speed) ease;
 }

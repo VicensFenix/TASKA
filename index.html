@@ -13,6 +13,7 @@
 
     <!-- Links -->
     <link rel="stylesheet" href="/assets/css/sidebar.css">
+    <link rel="stylesheet" href="/assets/css/sectionTask.css">
     <link rel="shortcut icon" href="Logo_TASKA.ico" type="image/x-icon">
 
     <!-- APIS -->
@@ -82,44 +83,35 @@
 
     </aside>  
 
-    /<!-- Contenedor de la hora y fecha en tiempo real -->
-    <div>
+    <main class="main">
 
-    </div>
+        <!-- Sección de lista de tareas -->
+        <section class="section-task">
 
-    <!-- Sección de lista de tareas -->
-    <section class="section-task">
+            <!-- Contenedor de crear tareas -->
+            <div class="content-task">
+                <input id="titleTask" class="input-task" type="text" placeholder="Agrega el titulo de tu tarea">
+                <input id="writeTask" class="input-task"  type="text" placeholder="Escriba su tarea">
+                <button id="createTask" class="btncreate-task">
+                    <span class="icon-create material-symbols-outlined">
+                        add
+                    </span>
+                </button>
+            </div>
 
-        <!-- Contenedor de crear tareas -->
-        <div class="content-task">
-            <input id="titleTask" class="input-task" type="text" placeholder="Agrega el titulo de tu tarea">
-            <input id="writeTask" class="input-task"  type="text" placeholder="Escriba su tarea">
-            <button id="createTask" class="btncreate-task">
-                <span class="icon-create material-symbols-outlined">
-                    add
-                </span>
-            </button>
-        </div>
+            <!-- Contenedor de tareas creadas - Ahora vacío inicialmente -->
+            <div class="grid-taskcreate">
+                <ul class="list-task">
+                    <!-- Las tareas se agregarán aquí dinámicamente -->
+                </ul>
+            </div>
 
-        <!-- Contenedor de tareas creadas en formas de grillas
-            Cada tarea ira en 3 por columna  
-        -->
-        <div class="grid-taskcreate">
-            <ul class="list-task">
-                <i class="item-task">
-                    <h2><!-- Aqui va el titulo de la tarea --></h2>
-                    <p><!-- Aqui va el contenido de la tarea --></p>
-                    <input id="checkTask" class="check-task" type="checkbox">
-                    <button id="btndelate-task" class="btndelate-task">
-                        <span class="icon-delate material-symbols-outlined">
-                            delete
-                        </span>
-                    </button>
-                </i>
-            </ul>
-        </div>
+        </section>
 
-    </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/assets/js/task.js"></script>
 
 </body>
 </html>
