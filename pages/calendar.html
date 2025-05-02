@@ -71,67 +71,51 @@
     <main class="main-content">
         <div class="calendar-container">
             <div class="calendar-header">
-                <div class="calendar-nav">
-                    <button id="prev"><span class="material-symbols-outlined">chevron_left</span></button>
-                    <button id="today">Hoy</button>
-                    <button id="next"><span class="material-symbols-outlined">chevron_right</span></button>
-                </div>
-                <h2 id="calendar-title" class="calendar-title">Mes y Año</h2>
-                <div class="calendar-actions">
-                    <button id="add-event" class="add-event-btn">
-                        <span class="material-symbols-outlined">add</span> Evento
-                    </button>
-                </div>
+              <button id="prevMonth">←</button>
+              <div class="calendar-title" id="monthYear"></div>
+              <button id="nextMonth">→</button>
+              <button id="openModal" class="add-event-btn">Agregar Evento</button>
             </div>
-        
-            <!-- Encabezados de días de la semana -->
-            <div class="calendar-weekdays" id="weekdays-header">
-                <div>Dom</div>
-                <div>Lun</div>
-                <div>Mar</div>
-                <div>Mié</div>
-                <div>Jue</div>
-                <div>Vie</div>
-                <div>Sáb</div>
+            <div class="calendar-weekdays">
+              <div>Dom</div>
+              <div>Lun</div>
+              <div>Mar</div>
+              <div>Mié</div>
+              <div>Jue</div>
+              <div>Vie</div>
+              <div>Sáb</div>
             </div>
-        
-            <!-- Contenedor principal de días -->
-            <div id="calendar-days" class="calendar-days">
-                <!-- Los días se generarán dinámicamente con JavaScript -->
+            <div class="calendar-days" id="calendarDays">
+              <!-- Aquí el JS insertará los días -->
             </div>
-        </div>
+          </div>
     </main>
 
-    <!-- Modal para agregar eventos -->
-    <div id="event-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Agregar Evento</h3>
-                <button id="close-modal" class="close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="event-date">Fecha:</label>
-                    <input type="date" id="event-date" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="event-name">Nombre:</label>
-                    <input type="text" id="event-name" class="form-control" placeholder="Nombre del evento">
-                </div>
-                <div class="form-group">
-                    <label for="event-icon">Icono:</label>
-                    <select id="event-icon" class="form-control">
-                        <option value="event">Evento</option>
-                        <option value="meeting">Reunión</option>
-                        <option value="cake">Cumpleaños</option>
-                        <option value="work">Trabajo</option>
-                        <option value="medical_services">Médico</option>
-                        <option value="flight">Viaje</option>
-                    </select>
-                </div>
-                <button id="save-event" class="save-btn">Guardar Evento</button>
-            </div>
+    <!-- Modal -->
+  <div class="modal" id="eventModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Agregar Evento</h3>
+        <button class="close-btn" id="closeModal">&times;</button>
+      </div>
+      <form id="eventForm">
+        <input type="hidden" id="selectedDate">
+        <div class="form-group">
+          <label for="eventTitle">Título</label>
+          <input type="text" id="eventTitle" required>
         </div>
+        <div class="form-group">
+          <label for="eventType">Tipo</label>
+          <select id="eventType">
+            <option value="Reunión">Reunión</option>
+            <option value="Tarea">Tarea</option>
+            <option value="Evento">Evento</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <button type="submit" class="save-btn">Guardar Evento</button>
+      </form>
     </div>
+  </div>
 </body>
 </html>
